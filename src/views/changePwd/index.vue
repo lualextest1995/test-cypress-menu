@@ -1,5 +1,5 @@
 <template>
-  <RouterView />
+  <div>changePwd</div>
 </template>
 
 <script setup></script>

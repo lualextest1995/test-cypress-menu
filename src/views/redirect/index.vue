@@ -1,5 +1,5 @@
 <template>
-  <RouterView />
+  <div>redirect</div>
 </template>
 
 <script setup></script>

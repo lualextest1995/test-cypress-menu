@@ -1,5 +1,5 @@
 <template>
-  <RouterView />
+  <div>500</div>
 </template>
 
 <script setup></script>

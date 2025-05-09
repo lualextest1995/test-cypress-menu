@@ -1,5 +1,8 @@
 <template>
-  <RouterView />
+  <div>
+    test layout
+    <slot />
+  </div>
 </template>
 
 <script setup></script>
