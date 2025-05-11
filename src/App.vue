@@ -7,12 +7,18 @@
   </el-table>
   <el-input v-model="input" style="width: 240px" placeholder="Please input" data-cy="input" />
   <hr />
+  <p>bootstraptable</p>
+  <table id="table1" data-cy="bootStrapTable"></table>
+  <el-input v-model="input1" style="width: 240px" placeholder="Please input" data-cy="input1" />
+
   <RouterView />
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import $ from 'jquery'
 const input = ref('')
+const input1 = ref('')
 const tableData = [
   {
     date: '2016-05-03',
@@ -35,6 +41,41 @@ const tableData = [
     address: 'No. 189, Grove St, Los Angeles',
   },
 ]
+
+function showTable() {
+  $('#table1').bootstrapTable({
+    columns: [
+      {
+        field: 'id',
+        title: 'Item ID',
+      },
+      {
+        field: 'name',
+        title: 'Item Name',
+      },
+      {
+        field: 'price',
+        title: 'Item Price',
+      },
+    ],
+    data: [
+      {
+        id: 1,
+        name: 'Item 1',
+        price: '$1',
+      },
+      {
+        id: 2,
+        name: 'Item 2',
+        price: '$2',
+      },
+    ],
+  })
+}
+
+onMounted(() => {
+  showTable()
+})
 </script>
 
 <style lang="scss" scoped></style>

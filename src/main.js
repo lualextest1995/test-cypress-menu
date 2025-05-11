@@ -6,6 +6,8 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import permissionDirective from '@/directives/permission'
 import elementDirective from '@/directives/element'
+import 'bootstrap-table/dist/bootstrap-table.min.css'
+import 'bootstrap-table/dist/bootstrap-table.min.js'
 
 import App from './App.vue'
 import router from './router'
