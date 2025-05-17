@@ -14,13 +14,15 @@
     "lint:oxlint": "oxlint . --fix -D correctness --ignore-path .gitignore",
     "lint:eslint": "eslint . --fix",
     "lint": "run-s lint:*",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "server": "json-server --watch db.json --port 3000"
   },
   "dependencies": {
     "bootstrap": "^5.3.6",
     "bootstrap-table": "^1.24.1",
     "element-plus": "^2.9.10",
     "jquery": "^3.7.1",
+    "json-server": "^1.0.0-beta.3",
     "pinia": "^3.0.1",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"

@@ -1,24 +1,47 @@
-// https://on.cypress.io/api
-
 describe('My First Test', () => {
-  it('visits the app root url', () => {
-    cy.visit('/')
-    cy.getFirstRowData('el-table', 'el-table-firstRow')
-    cy.get('@el-table-firstRow').then((rowData) => {
-      cy.log('Row Data from alias:', rowData)
-      expect(rowData).to.have.property('Date')
-      expect(rowData).to.have.property('Name')
-      expect(rowData).to.have.property('Address')
-      cy.inputValue('input', rowData.Name)
+  beforeEach(() => {
+    cy.interceptApi({
+      url: 'http://localhost:3000/userFunction',
+      method: 'GET',
+      alias: 'userFunction',
     })
+  })
 
-    cy.getFirstRowData('bootStrapTable', 'bootStrapTable-firstRow1')
-    cy.get('@bootStrapTable-firstRow1').then((rowData) => {
-      cy.log('Row Data from alias:', rowData)
-      expect(rowData).to.have.property('Item ID')
-      expect(rowData).to.have.property('Item Name')
-      expect(rowData).to.have.property('Item Price')
-      cy.inputValue('input1', rowData['Item ID'])
+  it('create', function () {
+    cy.visit('/')
+    cy.wait('@userFunction')
+      .its('response.body')
+      .then((data) => {
+        cy.log('API Response:', data)
+        const permissions = data.data.find((item) => item.pageName === 'testPage') ?? {}
+        const permissionList = permissions.permissionList ?? []
+        cy.wrap(permissionList).as('permissionList')
+      })
+    cy.get('@permissionList').then((permissionList) => {
+      if (!permissionList.includes('create')) {
+        cy.log('No create permission')
+        this.skip()
+      }
     })
+    cy.log('繼續測試 create')
+  })
+
+  it('read', function () {
+    cy.visit('/')
+    cy.wait('@userFunction')
+      .its('response.body')
+      .then((data) => {
+        cy.log('API Response:', data)
+        const permissions = data.data.find((item) => item.pageName === 'testPage') ?? {}
+        const permissionList = permissions.permissionList ?? []
+        cy.wrap(permissionList).as('permissionList')
+      })
+    cy.get('@permissionList').then((permissionList) => {
+      if (!permissionList.includes('read')) {
+        cy.log('No create permission')
+        this.skip()
+      }
+    })
+    cy.log('繼續測試 read')
   })
 })

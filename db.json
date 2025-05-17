@@ -1,0 +1,14 @@
+{
+  "userFunction": {
+    "data": [
+      {
+        "pageName": "testPage",
+        "permissionList": ["create1", "read", "update", "delete"]
+      },
+      {
+        "pageName": "testPage2",
+        "permissionList": ["create", "read"]
+      }
+    ]
+  }
+}
